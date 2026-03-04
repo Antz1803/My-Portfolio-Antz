@@ -1,3 +1,20 @@
 @import "tailwindcss";
 
+@layer utilities {
+  .animated-gradient {
+    /* Conic gradient creates the multi-color ring */
+    background: conic-gradient(
+      from 0deg,
+      #ff00e5, 
+      #00f2ff, 
+      #ffb700, 
+      #ff00e5
+    );
+    animation: spin-ring 4s linear infinite;
+  }
 
+  @keyframes spin-ring {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+}
