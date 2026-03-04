@@ -15,7 +15,7 @@ function App() {
   const navLinkClasses = ({ isActive }) => 
     `transition-all duration-300 ${
       isActive 
-        ? "text-fuchsia-500 border-b-2 border-fuchsia-500 pb-1" 
+        ? "text-orange-500 border-b-2 border-orange-500 pb-1" 
         : "text-gray-400 hover:text-white"
     }`;
 
@@ -29,7 +29,7 @@ function App() {
             
             {/* Brand Logo */}
             <NavLink to="/" className="text-white font-serif italic text-xl tracking-tighter">
-              PORT<span className="text-fuchsia-500">FOLIO</span>
+              PORT<span className="text-orange-500">FOLIO</span>
             </NavLink>
 
             {/* Desktop Navigation (Hidden on Mobile) */}
@@ -62,13 +62,13 @@ function App() {
             isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }`}>
             <div className="flex flex-col gap-10 text-center uppercase tracking-[0.3em] font-bold">
-              <NavLink to="/" end onClick={closeMenu} className="text-2xl text-gray-400 hover:text-fuchsia-500 transition-colors">
+              <NavLink to="/" end onClick={closeMenu} className="text-2xl text-gray-400 hover:text-orange-500 transition-colors">
                 Home
               </NavLink>
-              <NavLink to="/about" onClick={closeMenu} className="text-2xl text-gray-400 hover:text-fuchsia-500 transition-colors">
+              <NavLink to="/about" onClick={closeMenu} className="text-2xl text-gray-400 hover:text-orange-500 transition-colors">
                 About
               </NavLink>
-              <NavLink to="/contact" onClick={closeMenu} className="text-2xl text-gray-400 hover:text-fuchsia-500 transition-colors">
+              <NavLink to="/contact" onClick={closeMenu} className="text-2xl text-gray-400 hover:text-orange-500 transition-colors">
                 Contact
               </NavLink>
             </div>
