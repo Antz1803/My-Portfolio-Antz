@@ -7,7 +7,8 @@
   "dev": "npm exec vite",
   "build": "npm exec vite build",
   "preview": "npm exec vite preview",
-  "lint": "eslint ."
+  "lint": "eslint .",
+   "postinstall": "chmod +x node_modules/.bin/vite"
 },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
