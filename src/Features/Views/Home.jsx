@@ -1,63 +1,63 @@
-    import React, { useState } from 'react'; 
-    import { useHomeController } from '../Controllers/HomeController';
+import React, { useState } from 'react'; 
+import { useHomeController } from '../Controllers/HomeController';
 
-    const Home = () => {
-        const { viewModel } = useHomeController();
-        const [currentSlide, setCurrentSlide] = useState(0); 
-        const [selectedCert, setSelectedCert] = useState(null);
-        const [isMenuOpen, setIsMenuOpen] = useState(false);
-        const [showCV, setShowCV] = useState(false);
-        const [cvIndex, setCvIndex] = useState(0);
+const Home = () => {
+    const { viewModel, handleLikeProject } = useHomeController();
+    const [currentSlide, setCurrentSlide] = useState(0); 
+    const [selectedCert, setSelectedCert] = useState(null);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [showCV, setShowCV] = useState(false);
+    const [cvIndex, setCvIndex] = useState(0);
 
-        const glassStyle = "bg-white/5 backdrop-blur-lg border border-white/10 p-6 shadow-2xl transition-all hover:scale-105 hover:bg-white/10 duration-300 rounded-xl";
-        const slides = viewModel.slides || []; 
-        
-        const nextSlide = () => setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-        const prevSlide = () => setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    const glassStyle = "bg-white/5 backdrop-blur-lg border border-white/10 p-6 shadow-2xl transition-all hover:scale-105 hover:bg-white/10 duration-300 rounded-xl";
+    const slides = viewModel.slides || []; 
+    
+    const nextSlide = () => setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    const prevSlide = () => setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
 
-        return (
+    return (
         <div 
-                className="relative w-full min-h-screen flex flex-col items-center bg-[#050505] py-20 lg:py-35 px-4 overflow-x-hidden"
-                onMouseMove={(e) => {
-                    const { currentTarget: target, clientX: x, clientY: y } = e;
-                    const { left, top } = target.getBoundingClientRect();
-                    target.style.setProperty("--x", `${x - left}px`);
-                    target.style.setProperty("--y", `${y - top}px`);
-                }}>
+            className="relative w-full min-h-screen flex flex-col items-center bg-[#050505] py-20 lg:py-35 px-4 overflow-x-hidden"
+            onMouseMove={(e) => {
+                const { currentTarget: target, clientX: x, clientY: y } = e;
+                const { left, top } = target.getBoundingClientRect();
+                target.style.setProperty("--x", `${x - left}px`);
+                target.style.setProperty("--y", `${y - top}px`);
+            }}>
 
-                {/* ─── MAIN BACKGROUND  ─── */}
-                <div className="absolute inset-0 pointer-events-none opacity-[0.15]" 
-                    style={{
-                        backgroundImage: `linear-gradient(to right, #f97316 2px, transparent 1px), linear-gradient(to bottom, #f97316 2px, transparent 1px)`,
-                        backgroundSize: '35px 35px',
-                        WebkitMaskImage: `radial-gradient(900px circle at var(--x, 50%) var(--y, 50%), black, transparent)`,
-                        maskImage: `radial-gradient(900px circle at var(--x, 50%) var(--y, 50%), black, transparent)`,
-                    }} 
-                />
-                
-                {/* ─── SECTION 1: HERO (Profile Card) ─── */}
-                <div className="relative w-full max-w-5xl h-[400px] flex items-center mb-20">
-                    <div className="absolute left-[-40px] top-1/2 -translate-y-1/2 w-[110%] h-[280px] z-[5] bg-white/5 backdrop-blur-md border-[3px] border-orange-500/50 shadow-[0_15px_35px_rgba(0,0,0,0.5)] [clip-path:polygon(0%_25%,55%_5%,100%_5%,100%_75%,45%_95%,0%_95%)]" />
-                    <div className="absolute left-[161px] top-1/2 -translate-y-1/2 w-[90%] h-[270px] z-10 bg-white/10 backdrop-blur-xl border-2 border-orange-500/50 shadow-[0_15px_35px_rgba(0,0,0,0.5)] [clip-path:polygon(0%_0%,45%_0%,100%_30%,100%_100%,55%_100%,0%_70%)] flex flex-col justify-center py-8 pr-[20%] pl-16">
-                        <h1 className="absolute bottom-[165px] font-serif italic font-light text-[clamp(1.6rem,3.5vw,3rem)] tracking-tight leading-[1.15] text-white m-0">
-                            {viewModel.name}
-                        </h1>
-                        <p className="absolute bottom-[145px] font-sans text-[clamp(0.55rem,1vw,0.7rem)] tracking-[0.28em] uppercase text-slate-400/65 mt-2.4">
-                            {viewModel.role}
-                        </p>
-                    </div>      
-                    <div className="absolute left-[65%] bottom-[62px] h-[110%] w-[45%] z-20 flex items-end justify-center pointer-events-none">
-                        <img src={viewModel.profileImage} alt="Profile" className="h-full w-full object-contain object-bottom drop-shadow-[0_0_32px_rgba(0,0,0,0.7)]" />
-                    </div>
+            {/* ─── MAIN BACKGROUND ─── */}
+            <div className="absolute inset-0 pointer-events-none opacity-[0.15]" 
+                style={{
+                    backgroundImage: `linear-gradient(to right, #f97316 2px, transparent 1px), linear-gradient(to bottom, #f97316 2px, transparent 1px)`,
+                    backgroundSize: '35px 35px',
+                    WebkitMaskImage: `radial-gradient(900px circle at var(--x, 50%) var(--y, 50%), black, transparent)`,
+                    maskImage: `radial-gradient(900px circle at var(--x, 50%) var(--y, 50%), black, transparent)`,
+                }} 
+            />
+            
+            {/* ─── SECTION 1: HERO (Profile Card) ─── */}
+            <div className="relative w-full max-w-5xl h-[400px] flex items-center mb-20">
+                <div className="absolute left-[-40px] top-1/2 -translate-y-1/2 w-[110%] h-[280px] z-[5] bg-white/5 backdrop-blur-md border-[3px] border-orange-500/50 shadow-[0_15px_35px_rgba(0,0,0,0.5)] [clip-path:polygon(0%_25%,55%_5%,100%_5%,100%_75%,45%_95%,0%_95%)]" />
+                <div className="absolute left-[161px] top-1/2 -translate-y-1/2 w-[90%] h-[270px] z-10 bg-white/10 backdrop-blur-xl border-2 border-orange-500/50 shadow-[0_15px_35px_rgba(0,0,0,0.5)] [clip-path:polygon(0%_0%,45%_0%,100%_30%,100%_100%,55%_100%,0%_70%)] flex flex-col justify-center py-8 pr-[20%] pl-16">
+                    <h1 className="absolute bottom-[165px] font-serif italic font-light text-[clamp(1.6rem,3.5vw,3rem)] tracking-tight leading-[1.15] text-white m-0">
+                        {viewModel.name}
+                    </h1>
+                    <p className="absolute bottom-[145px] font-sans text-[clamp(0.55rem,1vw,0.7rem)] tracking-[0.28em] uppercase text-slate-400/65 mt-2.4">
+                        {viewModel.role}
+                    </p>
+                </div>      
+                <div className="absolute left-[65%] bottom-[62px] h-[110%] w-[45%] z-20 flex items-end justify-center pointer-events-none">
+                    <img src={viewModel.profileImage} alt="Profile" className="h-full w-full object-contain object-bottom drop-shadow-[0_0_32px_rgba(0,0,0,0.7)]" />
                 </div>
+            </div>
 
 
-                {/* ─── SECTION 2: LINEAR GRID ─── */}
-                <div className="relative w-full max-w-7xl px-1 mb-20 z-30">
-                        <div className="flex items-center gap-4 mb-8">
-                            <h2 className="text-white text-2xl font-serif italic">Insights</h2>
-                            <div className="h-[1px] flex-1 bg-gradient-to-r from-orange-500/50 to-transparent" />
-                        </div>
+            {/* ─── SECTION 2: LINEAR GRID ─── */}
+            <div className="relative w-full max-w-7xl px-1 mb-20 z-30">
+                <div className="flex items-center gap-4 mb-8">
+                    <h2 className="text-white text-2xl font-serif italic">Insights</h2>
+                    <div className="h-[1px] flex-1 bg-gradient-to-r from-orange-500/50 to-transparent" />
+                </div>
                 <div className="relative w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-8 px-1 mt-10">
                     {/* Background Box */}
                     <div className={`${glassStyle} relative group overflow-hidden min-h-[250px]`} style={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 80%, 85% 100%, 0% 100%)' }}>
@@ -106,11 +106,9 @@
                                     setCvIndex(0);
                                     setShowCV(true);
                                 }}
-                                className="relative w-full py-3 bg-transparent border border-orange-500/50 text-orange-500 text-[10px] uppercase tracking-widest font-bold overflow-hidden group/btn hover:text-black transition-colors duration-300"
+                                className="relative w-full py-3 bg-transparent border border-orange-500/50 text-orange-500 text-[10px] uppercase tracking-widest font-bold overflow-hidden group/btn hover:text-black transition-colors duration-300 mb-2"
                             >
-                                <span className="relative z-10">
-                                    View my Curriculum Vitae
-                                </span>
+                                <span className="relative z-10">View my Curriculum Vitae</span>
                                 <div className="absolute inset-0 bg-orange-500 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300" />
                             </button>
                             <button onClick={() => window.open("https://linkedin.com/in/jeorge-rey-m-antipaso-110555290", "_blank")} className="relative w-full py-3 bg-transparent border border-orange-500/50 text-orange-500 text-[10px] uppercase tracking-widest font-bold overflow-hidden group/btn hover:text-black transition-colors duration-300">
@@ -120,89 +118,95 @@
                         </div>
                     </div>
                 </div>
-                </div>
-                    {/* ─── CURRICULUM VITAE MODAL ─── */}
-                    {showCV && (
-                        <div
-                            className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/95 backdrop-blur-sm"
+            </div>
+
+            {/* ─── CURRICULUM VITAE MODAL ─── */}
+            {showCV && (
+                <div
+                    className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/95 backdrop-blur-sm"
+                    onClick={() => setShowCV(false)}
+                >
+                    <div
+                        className="relative max-w-5xl w-full bg-[#111] border border-white/10 rounded-lg overflow-hidden"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Close Button */}
+                        <button
+                            className="absolute top-4 right-4 z-20 p-2 bg-black/50 rounded-full text-white hover:bg-orange-500"
                             onClick={() => setShowCV(false)}
                         >
-                            <div
-                                className="relative max-w-5xl w-full bg-[#111] border border-white/10 rounded-lg overflow-hidden"
-                                onClick={(e) => e.stopPropagation()}
-                            >
-                                {/* Close Button */}
-                                <button
-                                    className="absolute top-4 right-4 z-20 p-2 bg-black/50 rounded-full text-white hover:bg-orange-500"
-                                    onClick={() => setShowCV(false)}
-                                >
-                                    ✕
-                                </button>
+                            ✕
+                        </button>
 
-                                {/* Previous Button */}
-                                <button
-                                    className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 bg-black/60 rounded-full text-white hover:bg-orange-500"
-                                    onClick={() =>
-                                        setCvIndex((prev) =>
-                                            prev === 0
-                                                ? viewModel.curriculumvitae.images.length - 1
-                                                : prev - 1
-                                        )
-                                    }
-                                >
-                                    ←
-                                </button>
+                        {/* Previous Button */}
+                        <button
+                            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 bg-black/60 rounded-full text-white hover:bg-orange-500"
+                            onClick={() =>
+                                setCvIndex((prev) =>
+                                    prev === 0
+                                        ? viewModel.curriculumvitae.images.length - 1
+                                        : prev - 1
+                                )
+                            }
+                        >
+                            ←
+                        </button>
 
-                                {/* Next Button */}
-                                <button
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 bg-black/60 rounded-full text-white hover:bg-orange-500"
-                                    onClick={() =>
-                                        setCvIndex((prev) =>
-                                            prev === viewModel.curriculumvitae.images.length - 1
-                                                ? 0
-                                                : prev + 1
-                                        )
-                                    }
-                                >
-                                    →
-                                </button>
+                        {/* Next Button */}
+                        <button
+                            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 bg-black/60 rounded-full text-white hover:bg-orange-500"
+                            onClick={() =>
+                                setCvIndex((prev) =>
+                                    prev === viewModel.curriculumvitae.images.length - 1
+                                        ? 0
+                                        : prev + 1
+                                )
+                            }
+                        >
+                            →
+                        </button>
 
-                                {/* Image */}
-                                <img
-                                    src={viewModel.curriculumvitae.images[cvIndex]}
-                                    alt={`CV Page ${cvIndex + 1}`}
-                                    className="w-full max-h-[85vh] object-contain"
-                                />
+                        {/* Image */}
+                        <img
+                            src={viewModel.curriculumvitae.images[cvIndex]}
+                            alt={`CV Page ${cvIndex + 1}`}
+                            className="w-full max-h-[85vh] object-contain"
+                        />
 
-                                {/* Footer */}
-                                <div className="p-4 text-center border-t border-white/10">
-                                    <h3 className="text-white text-lg">
-                                        {viewModel.curriculumvitae.title}
-                                    </h3>
-
-                                    <p className="text-orange-500 text-sm">
-                                        Page {cvIndex + 1} of{" "}
-                                        {viewModel.curriculumvitae.images.length}
-                                    </p>
-                                </div>
-                            </div>
+                        {/* Footer */}
+                        <div className="p-4 text-center border-t border-white/10">
+                            <h3 className="text-white text-lg">
+                                {viewModel.curriculumvitae.title}
+                            </h3>
+                            <p className="text-orange-500 text-sm">
+                                Page {cvIndex + 1} of{" "}
+                                {viewModel.curriculumvitae.images.length}
+                            </p>
                         </div>
-                    )}
-                    
+                    </div>
+                </div>
+            )}
+            
+            {/* ─── SECTION 3: WORK EXPERIENCE ─── */}
+            <div className="relative w-full max-w-7xl px-1 mb-32 z-30">
+                <div className="flex items-center gap-4 mb-8">
+                    <h2 className="text-white text-2xl font-serif italic">Work Experience</h2>
+                    <div className="h-[1px] flex-1 bg-gradient-to-r from-orange-500/50 to-transparent" />
+                </div>
+            </div>
 
-                {/* ─── SECTION 3: PROJECTS & SEMINARS SLIDER ─── */}
-                <div className="relative w-full max-w-7xl px-1 mb-20 z-30">
-                        <div className="flex items-center gap-4 mb-8">
-                            <h2 className="text-white text-2xl font-serif italic">Projects & Seminars</h2>
-                            <div className="h-[1px] flex-1 bg-gradient-to-r from-orange-500/50 to-transparent" />
-                        </div>
+            {/* ─── SECTION 4: PROJECTS & SEMINARS SLIDER ─── */}
+            <div className="relative w-full max-w-7xl px-1 mb-20 z-30">
+                <div className="flex items-center gap-4 mb-8">
+                    <h2 className="text-white text-2xl font-serif italic">Projects & Seminars</h2>
+                    <div className="h-[1px] flex-1 bg-gradient-to-r from-orange-500/50 to-transparent" />
+                </div>
                 <div className="relative w-full max-w-7xl mt-12 px-1 mb-20 z-30">
                     <div 
                         className={`${glassStyle} relative w-full overflow-hidden group min-h-[550px]`}
                         style={{ clipPath: 'polygon(0% 0%, 95% 0%, 100% 10%, 100% 100%, 5% 100%, 0% 90%)' }}
                     >
                         <div className="flex flex-col lg:flex-row h-full min-h-[550px]">
-                            
                             {/* Slide Content */}
                             <div className="flex-[0.8] p-8 md:p-12 flex flex-col justify-between z-20 bg-[#050505]/60 backdrop-blur-md">
                                 <div>
@@ -239,7 +243,7 @@
                                         key={index}
                                         className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-80 scale-100' : 'opacity-0 scale-110'}`}
                                     >
-                                    <img 
+                                        <img 
                                             src={slide.img} 
                                             alt={slide.title}
                                             className="w-full h-full object-cover transition-all duration-700"
@@ -261,93 +265,168 @@
                 </div>
             </div>
 
-            {/* ─── SECTION 4: CERTIFICATES & AWARDS ─── */}
-                    <div className="relative w-full max-w-7xl px-1 mb-32 z-30">
-                        <div className="flex items-center gap-4 mb-8">
-                            <h2 className="text-white text-2xl font-serif italic">Certificates & Recognitions</h2>
-                            <div className="h-[1px] flex-1 bg-gradient-to-r from-orange-500/50 to-transparent" />
-                        </div>
+            {/* ─── SECTION 5: CERTIFICATES & AWARDS ─── */}
+            <div className="relative w-full max-w-7xl px-1 mb-32 z-30">
+                <div className="flex items-center gap-4 mb-8">
+                    <h2 className="text-white text-2xl font-serif italic">Certificates & Recognitions</h2>
+                    <div className="h-[1px] flex-1 bg-gradient-to-r from-orange-500/50 to-transparent" />
+                </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {viewModel.certificates?.map((cert, index) => (
-                                <div 
-                                    key={index} 
-                                    onClick={() => setSelectedCert(cert)} 
-                                    className={`${glassStyle} group relative flex flex-col items-start gap-4 overflow-hidden border-orange-500/20 cursor-pointer`}
-                                >
-                                    {/* Decorative Corner */}
-                                    <div className="absolute top-0 right-0 w-8 h-8 bg-orange-500/10 transition-colors group-hover:bg-orange-500/20 [clip-path:polygon(100%_0%,_0%_0%,_100%_100%)]" />
-                                    
-                                    <div className="text-3xl filter grayscale group-hover:grayscale-0 transition-all">
-                                        {cert.icon}
-                                    </div>
-
-                                    <div>
-                                        <h4 className="text-white font-medium text-sm leading-tight mb-1 group-hover:text-orange-400 transition-colors">
-                                            {cert.title}
-                                        </h4>
-                                        <p className="text-white/40 text-[10px] uppercase tracking-widest font-bold">
-                                            {cert.issuer}
-                                        </p>
-                                    </div>
-
-                                    {/* View Hint Icon */}
-                                    <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <svg className="w-4 h-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                        </svg>
-                                    </div>
-
-                                    <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-500 group-hover:w-full" />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* ─── CERTIFICATE MODAL (LIGHTBOX) ─── */}
-                    {selectedCert && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {viewModel.certificates?.map((cert, index) => (
                         <div 
-                            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm animate-in fade-in duration-300"
+                            key={index} 
+                            onClick={() => setSelectedCert(cert)} 
+                            className={`${glassStyle} group relative flex flex-col items-start gap-4 overflow-hidden border-orange-500/20 cursor-pointer`}
+                        >
+                            {/* Decorative Corner */}
+                            <div className="absolute top-0 right-0 w-8 h-8 bg-orange-500/10 transition-colors group-hover:bg-orange-500/20 [clip-path:polygon(100%_0%,_0%_0%,_100%_100%)]" />
+                            
+                            <div className="text-3xl filter grayscale group-hover:grayscale-0 transition-all">
+                                {cert.icon}
+                            </div>
+
+                            <div>
+                                <h4 className="text-white font-medium text-sm leading-tight mb-1 group-hover:text-orange-400 transition-colors">
+                                    {cert.title}
+                                </h4>
+                                <p className="text-white/40 text-[10px] uppercase tracking-widest font-bold">
+                                    {cert.issuer}
+                                </p>
+                            </div>
+
+                            {/* View Hint Icon */}
+                            <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <svg className="w-4 h-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </div>
+
+                            <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-500 group-hover:w-full" />
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* ─── CERTIFICATE MODAL (LIGHTBOX) ─── */}
+            {selectedCert && (
+                <div 
+                    className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm animate-in fade-in duration-300"
+                    onClick={() => setSelectedCert(null)}
+                >
+                    <div 
+                        className="relative max-w-4xl w-full bg-[#111] border border-white/10 p-2 rounded-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300"
+                        onClick={(e) => e.stopPropagation()} 
+                    >
+                        <button 
+                            className="absolute top-4 right-4 z-[110] p-2 bg-black/50 text-white rounded-full hover:bg-orange-500 transition-colors"
                             onClick={() => setSelectedCert(null)}
                         >
-                            <div 
-                                className="relative max-w-4xl w-full bg-[#111] border border-white/10 p-2 rounded-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300"
-                                onClick={(e) => e.stopPropagation()} 
-                            >
-                                <button 
-                                    className="absolute top-4 right-4 z-[110] p-2 bg-black/50 text-white rounded-full hover:bg-orange-500 transition-colors"
-                                    onClick={() => setSelectedCert(null)}
-                                >
-                                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
 
-                                <img 
-                                    src={selectedCert.image} 
-                                    alt={selectedCert.title} 
-                                    className="w-full h-auto max-h-[80vh] object-contain rounded"
-                                />
+                        <img 
+                            src={selectedCert.image} 
+                            alt={selectedCert.title} 
+                            className="w-full h-auto max-h-[80vh] object-contain rounded"
+                        />
 
-                                <div className="p-6">
-                                    <h3 className="text-white text-xl font-serif italic">{selectedCert.title}</h3>
-                                    <p className="text-orange-500 text-sm font-mono mt-1">{selectedCert.issuer} — {selectedCert.date}</p>
+                        <div className="p-6">
+                            <h3 className="text-white text-xl font-serif italic">{selectedCert.title}</h3>
+                            <p className="text-orange-500 text-sm font-mono mt-1">{selectedCert.issuer} — {selectedCert.date}</p>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+{/* ─── SECTION 6: PROJECTS GRID ─── */}
+            <div className="relative w-full max-w-7xl px-1 mb-32 z-30">
+                <div className="flex items-center gap-4 mb-8">
+                    <h2 className="text-white text-2xl font-serif italic">Projects</h2>
+                    <div className="h-[1px] flex-1 bg-gradient-to-r from-orange-500/50 to-transparent" />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {/* Securely access viewModel properties via conditional checking */}
+                    {viewModel.projects?.map((project, index) => (
+                        <div 
+                            key={index} 
+                            className="group relative backdrop-blur-sm bg-neutral-900/40 border border-neutral-800 rounded-xl p-6 transition-all duration-300 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.05)] flex flex-col justify-between"
+                        >
+                            <div>
+                                {/* Repository Name & Interactive Portfolio Likes */}
+                                <div className="flex items-center justify-between mb-3">
+                                    <h3 className="text-xl font-medium text-neutral-200 group-hover:text-orange-400 transition-colors duration-300">
+                                        {project.title}
+                                    </h3>
+                                    <button 
+                                        onClick={() => {
+                                            if (typeof handleLikeProject === 'function') {
+                                                handleLikeProject(project.id || index);
+                                            }
+                                        }}
+                                        className="flex items-center gap-1 text-xs text-neutral-400 bg-neutral-800/50 px-2.5 py-1 rounded-full border border-neutral-700/30 hover:border-orange-500/40 hover:text-orange-400 active:scale-95 transition-all cursor-pointer group/like"
+                                        title="Like this project"
+                                    >
+                                        <span className="group-hover/like:scale-110 transition-transform inline-block">⭐</span> 
+                                        {project.likes || 0}
+                                    </button>
+                                </div>
+
+                                {/* Description */}
+                                <p className="text-neutral-400 text-sm leading-relaxed mb-6">
+                                    {project.description}
+                                </p>
+                            </div>
+
+                            <div>
+                                {/* Tech Stack Tags */}
+                                <div className="flex flex-wrap gap-2 mb-6">
+                                    {project.techStack?.map((tech, techIdx) => (
+                                        <span 
+                                            key={techIdx} 
+                                            className="text-xs font-mono text-neutral-400 bg-neutral-800/30 px-2.5 py-1 rounded border border-neutral-800"
+                                        >
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
+
+                                {/* Action Links */}
+                                <div className="flex items-center gap-4 text-sm font-medium">
+                                    <a 
+                                        href={project.githubUrl} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        className="text-neutral-400 hover:text-white flex items-center gap-1.5 transition-colors"
+                                    >
+                                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                            <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.061.069-.061 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                                        </svg>
+                                        Code
+                                    </a>
+                                    {project.liveUrl && (
+                                        <a 
+                                            href={project.liveUrl} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="text-orange-400/80 hover:text-orange-400 flex items-center gap-1 transition-colors"
+                                        >
+                                            Live Demo ↗
+                                        </a>
+                                    )}
                                 </div>
                             </div>
                         </div>
-                    )}
-
-                    {/* ─── SECTION 5: Work Experience ─── */}
-                    <div className="relative w-full max-w-7xl px-1 mb-32 z-30">
-                        <div className="flex items-center gap-4 mb-8">
-                            <h2 className="text-white text-2xl font-serif italic">Work Experience</h2>
-                            <div className="h-[1px] flex-1 bg-gradient-to-r from-orange-500/50 to-transparent" />
-                        </div>
-                    </div>
-
+                    ))}
+                </div>
             </div>
-        );
-    };
 
-    export default Home;
+        </div>
+    );
+};
+
+export default Home;

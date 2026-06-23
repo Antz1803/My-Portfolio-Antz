@@ -150,7 +150,38 @@ projectDescription: "A showcase of technical implementations, award-winning desi
     //CVPage2,
     //CVPage3
   ]
-}
+},
+
+projects: [
+  {
+    title: "Teachers Attendance Management",
+    description: "A web-based dashboard designed to automate, monitor, and streamline daily attendance tracking and reporting for educational staff.",
+    techStack: ["Html", "Css"],
+    githubUrl: "https://github.com/Antz1803/Teachers-Attendance-Management.git",
+    liveUrl: "https://teachers-attendance-management.onrender.com/"
+  },
+  {
+    title: "Dental Clinic System",
+    description: "An enterprise management application providing digital patient records, appointment scheduling, and treatment tracking to optimize clinical workflows.",
+    techStack: ["ASP.NET mvc", "C#", "Javascript", "Html", "Bootstrap"],
+    githubUrl: "https://github.com/Antz1803/Dental-Clinic-System.git",
+    liveUrl: null 
+  },
+  {
+    title: "Computer Laboratory Inventory System",
+    description: "FROM MANUAL TO DIGITAL: An automated computer laboratory inventory and resource tracking system built to streamline equipment audits and hardware diagnostics for DNTS.",
+    techStack: ["ASP.NET mvc", "C#", "Javascript", "Html","Bootstrap"],
+    githubUrl: "https://github.com/Antz1803/Computer-Laboratory-Inventory-System.git",
+    liveUrl: null
+  },
+  {
+    title: "Bill Pay",
+    description: "A cross-platform mobile utility tracking app that simplifies personal financial management, budgeting, and monthly utility payment schedules.",
+    techStack: [".NET maui", "C#", "Javascript", "Html","Bootstrap"],
+    githubUrl: "https://github.com/Antz1803/Computer-Laboratory-Inventory-System.git", // Note: Double-check if this repository URL should be updated for Bill Pay!
+    liveUrl: null
+  }
+]
   
 };
   
