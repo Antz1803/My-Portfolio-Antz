@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { HomeData } from '../Models/HomeModel';
 // 1. Import your working database reference from your config file
-import { db } from '../../Firebase/firebaseConfig'; 
+import { db } from '../../Firebase/FirebaseConfig'; 
 import { ref, onValue, runTransaction } from 'firebase/database';
 
 export const useHomeController = () => {
