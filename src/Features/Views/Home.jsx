@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHomeController } from '../Controllers/HomeController';
 
 const Home = () => {
-    const { viewModel, handleLikeProject } = useHomeController();
+    const { viewModel, handleLikeProject, likedByUser } = useHomeController();
     const [currentSlide, setCurrentSlide] = useState(0); 
     const [selectedCert, setSelectedCert] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -341,90 +341,97 @@ const Home = () => {
                     </div>
                 </div>
             )}
-
 {/* ─── SECTION 6: PROJECTS GRID ─── */}
-            <div className="relative w-full max-w-7xl px-1 mb-32 z-30">
-                <div className="flex items-center gap-4 mb-8">
-                    <h2 className="text-white text-2xl font-serif italic">Projects</h2>
-                    <div className="h-[1px] flex-1 bg-gradient-to-r from-orange-500/50 to-transparent" />
-                </div>
+<div className="relative w-full max-w-7xl px-1 mb-32 z-30">
+    <div className="flex items-center gap-4 mb-8">
+        <h2 className="text-white text-2xl font-serif italic">Projects</h2>
+        <div className="h-[1px] flex-1 bg-gradient-to-r from-orange-500/50 to-transparent" />
+    </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {/* Securely access viewModel properties via conditional checking */}
-                    {viewModel.projects?.map((project, index) => (
-                        <div 
-                            key={index} 
-                            className="group relative backdrop-blur-sm bg-neutral-900/40 border border-neutral-800 rounded-xl p-6 transition-all duration-300 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.05)] flex flex-col justify-between"
-                        >
-                            <div>
-                                {/* Repository Name & Interactive Portfolio Likes */}
-                                <div className="flex items-center justify-between mb-3">
-                                    <h3 className="text-xl font-medium text-neutral-200 group-hover:text-orange-400 transition-colors duration-300">
-                                        {project.title}
-                                    </h3>
-                                    <button 
-                                        onClick={() => {
-                                            if (typeof handleLikeProject === 'function') {
-                                                handleLikeProject(project.id || index);
-                                            }
-                                        }}
-                                        className="flex items-center gap-1 text-xs text-neutral-400 bg-neutral-800/50 px-2.5 py-1 rounded-full border border-neutral-700/30 hover:border-orange-500/40 hover:text-orange-400 active:scale-95 transition-all cursor-pointer group/like"
-                                        title="Like this project"
-                                    >
-                                        <span className="group-hover/like:scale-110 transition-transform inline-block">⭐</span> 
-                                        {project.likes || 0}
-                                    </button>
-                                </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {viewModel.projects?.map((project, index) => {
+            const projectId = project.id || index;
+            const hasBeenLiked = likedByUser?.[projectId];
 
-                                {/* Description */}
-                                <p className="text-neutral-400 text-sm leading-relaxed mb-6">
-                                    {project.description}
-                                </p>
-                            </div>
-
-                            <div>
-                                {/* Tech Stack Tags */}
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                    {project.techStack?.map((tech, techIdx) => (
-                                        <span 
-                                            key={techIdx} 
-                                            className="text-xs font-mono text-neutral-400 bg-neutral-800/30 px-2.5 py-1 rounded border border-neutral-800"
-                                        >
-                                            {tech}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                {/* Action Links */}
-                                <div className="flex items-center gap-4 text-sm font-medium">
-                                    <a 
-                                        href={project.githubUrl} 
-                                        target="_blank" 
-                                        rel="noopener noreferrer" 
-                                        className="text-neutral-400 hover:text-white flex items-center gap-1.5 transition-colors"
-                                    >
-                                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                                            <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.061.069-.061 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-                                        </svg>
-                                        Code
-                                    </a>
-                                    {project.liveUrl && (
-                                        <a 
-                                            href={project.liveUrl} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer" 
-                                            className="text-orange-400/80 hover:text-orange-400 flex items-center gap-1 transition-colors"
-                                        >
-                                            Live Demo ↗
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
+            return (
+                <div 
+                    key={index} 
+                    className="group relative backdrop-blur-sm bg-neutral-900/40 border border-neutral-800 rounded-xl p-6 transition-all duration-300 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,0.05)] flex flex-col justify-between"
+                >
+                    <div>
+                        <div className="flex items-center justify-between mb-3">
+                            <h3 className="text-xl font-medium text-neutral-200 group-hover:text-orange-400 transition-colors duration-300">
+                                {project.title}
+                            </h3>
+                            
+                            {/* Dynamic button that locks and alters look after a vote */}
+                            <button 
+                                onClick={() => {
+                                    if (typeof handleLikeProject === 'function') {
+                                        handleLikeProject(projectId);
+                                    }
+                                }}
+                                disabled={hasBeenLiked}
+                                className={`flex items-center gap-1 text-xs px-2.5 py-1 rounded-full border transition-all ${
+                                    hasBeenLiked
+                                        ? 'text-orange-400 bg-orange-500/10 border-orange-500/30 opacity-80 cursor-default' 
+                                        : 'text-neutral-400 bg-neutral-800/50 border-neutral-700/30 hover:border-orange-500/40 hover:text-orange-400 active:scale-95 cursor-pointer group/like'
+                                }`}
+                                title={hasBeenLiked ? "You already liked this project" : "Like this project"}
+                            >
+                                <span className={`transition-transform inline-block ${!hasBeenLiked && 'group-hover/like:scale-110'}`}>
+                                    ⭐
+                                </span> 
+                                {project.likes || 0}
+                            </button>
                         </div>
-                    ))}
-                </div>
-            </div>
 
+                        <p className="text-neutral-400 text-sm leading-relaxed mb-6">
+                            {project.description}
+                        </p>
+                    </div>
+
+                    <div>
+                        <div className="flex flex-wrap gap-2 mb-6">
+                            {project.techStack?.map((tech, techIdx) => (
+                                <span 
+                                    key={techIdx} 
+                                    className="text-xs font-mono text-neutral-400 bg-neutral-800/30 px-2.5 py-1 rounded border border-neutral-800"
+                                >
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
+
+                        <div className="flex items-center gap-4 text-sm font-medium">
+                            <a 
+                                href={project.githubUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="text-neutral-400 hover:text-white flex items-center gap-1.5 transition-colors"
+                            >
+                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                    <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.061.069-.061 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                                </svg>
+                                Code
+                            </a>
+                            {project.liveUrl && (
+                                <a 
+                                    href={project.liveUrl} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="text-orange-400/80 hover:text-orange-400 flex items-center gap-1 transition-colors"
+                                >
+                                    Live Demo ↗
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        })}
+    </div>
+</div>
         </div>
     );
 };

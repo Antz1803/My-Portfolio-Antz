@@ -178,7 +178,35 @@ projects: [
     title: "Bill Pay",
     description: "A cross-platform mobile utility tracking app that simplifies personal financial management, budgeting, and monthly utility payment schedules.",
     techStack: [".NET maui", "C#", "Javascript", "Html","Bootstrap"],
-    githubUrl: "https://github.com/Antz1803/Computer-Laboratory-Inventory-System.git", // Note: Double-check if this repository URL should be updated for Bill Pay!
+    githubUrl: "https://github.com/Antz1803/Computer-Laboratory-Inventory-System.git", 
+    liveUrl: null
+  },
+  {
+    title: "Blood-Link",
+    description: "A web platform dedicated to bridging the gap between blood donors and patients, offering real-time donor search matching and request management.",
+    techStack: ["ASP.NET mvc", "C#", "Javascript", "Html","Css"],
+    githubUrl: "https://github.com/Antz1803/Blood-Link.git",
+    liveUrl: null
+  },
+  {
+    title: "DiraTelecome",
+    description: "A desktop-based telecommunications simulation system managing subscriber records, cellular account plans, and transaction billing logs.",
+    techStack: ["Windows Form", "C#"],
+    githubUrl: "https://github.com/Antz1803/DiraTelecome.git", 
+    liveUrl: null
+  },
+  {
+    title: "Jarm_Game",
+    description: "An interactive, logic-driven desktop game demonstrating Object-Oriented Programming (OOP) fundamentals, state tracking, and classic 2D UI mechanics.",
+    techStack: ["Windows Form", "C#"],
+    githubUrl: "https://github.com/Antz1803/Jarm_Game.git",
+    liveUrl: null
+  },
+  {
+    title: "Hex-Color",
+    description: "A clean, lightweight utility app that allows cross-platform mobile users to dynamically generate, customize, and convert hex color codes for design palettes.",
+    techStack: [".NET maui", "C#"],
+    githubUrl: "https://github.com/Antz1803/Hex-Color.git", 
     liveUrl: null
   }
 ]
