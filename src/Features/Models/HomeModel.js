@@ -165,7 +165,7 @@ projects: [
     description: "An enterprise management application providing digital patient records, appointment scheduling, and treatment tracking to optimize clinical workflows.",
     techStack: ["ASP.NET mvc", "C#", "Javascript", "Html", "Bootstrap"],
     githubUrl: "https://github.com/Antz1803/Dental-Clinic-System.git",
-    liveUrl: null 
+    liveUrl: "https://dental-clinic-system-1-0.onrender.com"
   },
   {
     title: "Computer Laboratory Inventory System",
