@@ -172,7 +172,7 @@ projects: [
     description: "FROM MANUAL TO DIGITAL: An automated computer laboratory inventory and resource tracking system built to streamline equipment audits and hardware diagnostics for DNTS.",
     techStack: ["ASP.NET mvc", "C#", "Javascript", "Html","Bootstrap"],
     githubUrl: "https://github.com/Antz1803/Computer-Laboratory-Inventory-System.git",
-    liveUrl: null
+    liveUrl: "https://computer-laboratory-inventory-system.onrender.com"
   },
   {
     title: "Bill Pay",
