@@ -15,7 +15,7 @@ import CertsMobileApp from '../../assets/Images/CertsMobileApp.png';
 import CertsInset from '../../assets/Images/CertsInset.png';
 import CertsSeminar from '../../assets/Images/CertsSemi.jpg';
 import CertsOjt from '../../assets/Images/CertsOjt.jpg';
-import CVPage1 from '../../assets/Images/CVAntipaso.jpg';
+import CVPage1 from '../../assets/Images/CVAntipaso.png';
 //import CVPage2 from '../../assets/Images/CVAntipaso1.jpg';
 // import CVPage3 from '../../assets/Images/CVAntipaso2.jpg';
 
