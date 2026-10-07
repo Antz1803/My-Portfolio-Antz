@@ -31,7 +31,7 @@ function App() {
             
             {/* Brand Logo */}
             <NavLink to="/" className="text-white font-serif italic text-xl tracking-tighter">
-              PORT<span className="text-orange-500">FOLIO</span>
+              AN<span className="text-orange-500">TZ</span>
             </NavLink>
 
             {/* Desktop Navigation (Hidden on Mobile) */}
